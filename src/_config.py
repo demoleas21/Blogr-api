@@ -1,6 +1,6 @@
 import os
 
-basedir = os.path.absolute(os.path.dirname(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 DATABASE = 'blogr.db'
 WTF_CSRF_ENABLED = True

@@ -1,2 +1,2 @@
-from src import app
+from src.api import app
 app.run(debug=True)

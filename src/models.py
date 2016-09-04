@@ -1,5 +1,5 @@
 from datetime import datetime
-from src import db
+from src.api import db
 
 
 class Comment(db.Model):

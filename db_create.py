@@ -1,4 +1,4 @@
-from src import db
+from src.api import db
 from src.models import Comment
 from datetime import datetime
 

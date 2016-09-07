@@ -54,8 +54,8 @@ def post_comments():
 @app.route('/comments/<int:comment_id>', methods=['PUT'])
 def update_comment(comment_id):
     comment = db.session.query(Comment).filter_by(comment_id=comment_id)
-    updated_comment = request.json['comment']
-    updated_author = request.json['author']
+    updated_comment = request.form['comment']
+    updated_author = request.form['author']
     comment.comment = updated_comment
     comment.author = updated_author
     db.commit()

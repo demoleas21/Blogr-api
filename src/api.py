@@ -39,13 +39,24 @@ def get_individual_comment(comment_id):
     return jsonify(comments=json_results)
 
 
-@app.route('/post', methods=['POST'])
+@app.route('/comments', methods=['POST'])
 def post_comments():
     new_comments = Comment(
-        request.json['comment'],
-        request.json['author'],
+        request.form['comment'],
+        request.form['author'],
         datetime.utcnow()
     )
     db.session.add(new_comments)
     db.session.commit()
-    return 'POST Successful'
+    return jsonify(new_comments.toDictionary())
+
+
+@app.route('/comments/<int:comment_id>', methods=['PUT'])
+def update_comment(comment_id):
+    comment = db.session.query(Comment).filter_by(comment_id=comment_id)
+    updated_comment = request.form['comment']
+    updated_author = request.form['author']
+    comment.comment = updated_comment
+    comment.author = updated_author
+    db.commit()
+    return jsonify(comment.toDictionary())

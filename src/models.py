@@ -14,3 +14,13 @@ class Comment(db.Model):
         self.comment = comment
         self.author = author
         self.posted_date = posted_date
+
+    def toDictionary(self):
+        return ({
+
+            'id': self.comment_id,
+            'comment':self.comment,
+            'author' : self.author,
+            'posted_date': self.posted_date
+
+        })

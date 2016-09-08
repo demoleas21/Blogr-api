@@ -5,7 +5,7 @@ from src.api import db
 class Comment(db.Model):
     __tablename__ = "comments"
 
-    comment_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
     posted_date = db.Column(db.Date, default=datetime.utcnow())
@@ -18,7 +18,7 @@ class Comment(db.Model):
     def toDictionary(self):
         return ({
 
-            'id': self.comment_id,
+            'id': self.id,
             'comment':self.comment,
             'author' : self.author,
             'posted_date': self.posted_date

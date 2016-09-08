@@ -57,7 +57,14 @@ def update_comment(id):
     updated_comment = request.form['comment']
     for comment in comments:
         comment.comment = updated_comment
-    # updated_author = request.form['author']
-    # comment.author = updated_author
     db.session.commit()
     return jsonify(comment.toDictionary())
+
+
+@app.route('/comments/<int:id>', methods=['DELETE'])
+def delete_comment(id):
+    comments = db.session.query(Comment).filter_by(id=id)
+    for comment in comments:
+        db.session.delete(comment)
+    db.session.commit()
+    return 'DELETED'

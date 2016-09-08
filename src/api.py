@@ -53,10 +53,11 @@ def post_comments():
 
 @app.route('/comments/<int:comment_id>', methods=['PUT'])
 def update_comment(comment_id):
-    comment = db.session.query(Comment).filter_by(comment_id=comment_id)
+    comments = db.session.query(Comment).filter_by(comment_id=comment_id)
     updated_comment = request.form['comment']
-    updated_author = request.form['author']
-    comment.comment = updated_comment
-    comment.author = updated_author
-    db.commit()
+    for comment in comments:
+        comment.comment = updated_comment
+    # updated_author = request.form['author']
+    # comment.author = updated_author
+    db.session.commit()
     return jsonify(comment.toDictionary())

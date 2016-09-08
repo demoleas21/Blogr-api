@@ -15,7 +15,7 @@ def get_comments():
     json_results = []
     for result in results:
         data = {
-            'comment_id': result.comment_id,
+            'id': result.id,
             'comment': result.comment,
             'author': result.author,
             'posted_date': result.posted_date
@@ -24,13 +24,13 @@ def get_comments():
     return jsonify(comments=json_results)
 
 
-@app.route('/comments/<int:comment_id>', methods=['GET'])
-def get_individual_comment(comment_id):
-    results = db.session.query(Comment).filter_by(comment_id=comment_id)
+@app.route('/comments/<int:id>', methods=['GET'])
+def get_individual_comment(id):
+    results = db.session.query(Comment).filter_by(id=id)
     json_results = []
     for result in results:
         data = {
-            'comment_id': result.comment_id,
+            'id': result.id,
             'comment': result.comment,
             'author': result.author,
             'posted_date': result.posted_date
@@ -51,9 +51,9 @@ def post_comments():
     return jsonify(new_comments.toDictionary())
 
 
-@app.route('/comments/<int:comment_id>', methods=['PUT'])
-def update_comment(comment_id):
-    comments = db.session.query(Comment).filter_by(comment_id=comment_id)
+@app.route('/comments/<int:id>', methods=['PUT'])
+def update_comment(id):
+    comments = db.session.query(Comment).filter_by(id=id)
     updated_comment = request.form['comment']
     for comment in comments:
         comment.comment = updated_comment
